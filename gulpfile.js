@@ -11,15 +11,12 @@ const browserSync   = require('browser-sync').create();
 const autoprefixer  = require('gulp-autoprefixer');
 const jpgRecompress = require('imagemin-jpeg-recompress'); 
 const clean         = require('gulp-clean');
-var deploy      = require('gulp-gh-pages');
+const deploy        = require('gulp-gh-pages');
 
 /**
  * Push build to gh-pages
  */
-gulp.task('deploy', function () {
-  return gulp.src("./dist/**/*")
-    .pipe(deploy())
-});
+
 
 // Paths
 var paths = {
@@ -98,8 +95,13 @@ gulp.task('clean', function () {
         .pipe(clean());
 });
 
+gulp.task('deploy', function () {
+    return gulp.src("./dist/**/*")
+      .pipe(deploy())
+  });
+
 // Prepare all assets for production
-gulp.task('build', gulp.series('sass', 'css', 'js', 'vendors', 'img'));
+gulp.task('build', gulp.series('sass', 'css', 'js', 'vendors', 'img', 'deploy'));
 
 
 // Watch (SASS, CSS, JS, and HTML) reload browser on change
