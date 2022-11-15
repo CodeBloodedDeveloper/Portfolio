@@ -11,7 +11,15 @@ const browserSync   = require('browser-sync').create();
 const autoprefixer  = require('gulp-autoprefixer');
 const jpgRecompress = require('imagemin-jpeg-recompress'); 
 const clean         = require('gulp-clean');
+var deploy      = require('gulp-gh-pages');
 
+/**
+ * Push build to gh-pages
+ */
+gulp.task('deploy', function () {
+  return gulp.src("./dist/**/*")
+    .pipe(deploy())
+});
 
 // Paths
 var paths = {
@@ -49,7 +57,7 @@ gulp.task('sass', function() {
 gulp.task('css', function() {
     return gulp.src(paths.src.css)
     .pipe(cleanCSS({compatibility: 'ie8'}))
-    .pipe(concat('johndoe.css'))
+    .pipe(concat('style.css'))
     .pipe(rename({ suffix: '.min' }))
     .pipe(gulp.dest(paths.dist.css))
 });
@@ -58,7 +66,7 @@ gulp.task('css', function() {
 gulp.task('js', function() {
     return gulp.src(paths.src.js)
     .pipe(uglify())
-    .pipe(concat('johndoe.js'))
+    .pipe(concat('style.js'))
     .pipe(rename({ suffix: '.min' }))
     .pipe(gulp.dest(paths.dist.js))
     .pipe(browserSync.stream());
