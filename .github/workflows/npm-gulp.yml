@@ -25,4 +25,12 @@ jobs:
     - name: Build
       run: |
         npm install
+        npm install gulp --save-dev
+        npm install gulp-gh-pages --save-dev
+        gulp sass
+        gulp css
+        gulp js
+        gulp img
+        gulp vendors
+        gulp build
         gulp deploy
