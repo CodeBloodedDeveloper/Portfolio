@@ -28,4 +28,4 @@ jobs:
         npm install gulp --save-dev
         npm install gulp-gh-pages --save-dev
         gulp build
-        gulp deploy
+        
