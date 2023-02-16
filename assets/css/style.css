@@ -10675,6 +10675,7 @@ button.bg-dark:focus {
 
 .text-center {
   text-align: center !important;
+  justify-content: center;
 }
 
 @media (min-width: 576px) {
@@ -10686,6 +10687,7 @@ button.bg-dark:focus {
   }
   .text-sm-center {
     text-align: center !important;
+    justify-content: center;
   }
 }
 
@@ -10698,6 +10700,7 @@ button.bg-dark:focus {
   }
   .text-md-center {
     text-align: center !important;
+    justify-content: center;
   }
 }
 
@@ -10710,6 +10713,7 @@ button.bg-dark:focus {
   }
   .text-lg-center {
     text-align: center !important;
+    justify-content: center;
   }
 }
 
@@ -10722,6 +10726,7 @@ button.bg-dark:focus {
   }
   .text-xl-center {
     text-align: center !important;
+    justify-content: center;
   }
 }
 
