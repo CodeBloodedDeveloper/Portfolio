@@ -1,20 +1,23 @@
 {
-  "name": "Harshil_Awasthi",
-  "version": "1.0.0",
-  "description": "An elegant responsive portfolio theme.",
+  "name": "Harshil_Awasthi_Portfolio",
+  "version": "1.0.1",
+  "description": "Backend Engineer Portfolio",
   "main": "gulpfile.js",
-  "author": "Harshil",
+  "author": "Harshil Awasthi",
   "scripts": {
-    "start": "gulp"
+    "start": "gulp watch",
+    "build": "gulp build",
+    "deploy": "gulp deploy"
   },
   "devDependencies": {
     "browser-sync": "^2.26.3",
     "gulp": "^4.0.0",
-    "gulp-clean-css": "^4.0.0",
-    "gulp-sass": "^4.0.2",
     "gulp-autoprefixer": "^6.1.0",
     "gulp-clean": "^0.4.0",
+    "gulp-clean-css": "^4.0.0",
     "gulp-concat": "^2.6.1",
+    "gulp-dart-sass": "^1.0.2",
+    "gulp-gh-pages": "^0.5.4",
     "gulp-imagemin": "^5.0.3",
     "gulp-rename": "^1.4.0",
     "gulp-uglify": "^3.0.2",
