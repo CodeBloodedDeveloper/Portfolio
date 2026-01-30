@@ -1,6 +1,6 @@
 // node.js Packages / Dependencies
 const gulp          = require('gulp');
-const sass          = require('gulp-dart-sass'); // UPDATED to Dart Sass
+const sass          = require('gulp-dart-sass'); // FIXED: Modern Sass compiler
 const uglify        = require('gulp-uglify');
 const rename        = require('gulp-rename');
 const concat        = require('gulp-concat');
@@ -84,7 +84,7 @@ gulp.task('vendors', function(){
     .pipe(gulp.dest(paths.dist.vendors))
 });
 
-// NEW: Copy HTML to dist for deployment
+// CRITICAL FIX: Copy HTML to dist
 gulp.task('html', function(){
     return gulp.src(paths.src.html)
     .pipe(gulp.dest(paths.dist.root));
@@ -96,7 +96,7 @@ gulp.task('clean', function () {
         .pipe(clean());
 });
 
-// Build task
+// Build task (Now includes 'html')
 gulp.task('build', gulp.series('clean', 'sass', 'css', 'js', 'vendors', 'img', 'html'));
 
 // Watch task
