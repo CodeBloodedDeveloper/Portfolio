@@ -1,6 +1,6 @@
 // node.js Packages / Dependencies
 const gulp          = require('gulp');
-const sass          = require('gulp-dart-sass'); // FIXED: Modern Sass compiler
+const sass          = require('gulp-dart-sass');
 const uglify        = require('gulp-uglify');
 const rename        = require('gulp-rename');
 const concat        = require('gulp-concat');
@@ -29,10 +29,11 @@ var paths = {
     },
     dist: {
         root:       'public_html/dist',
-        css:        'public_html/dist/css',
-        js:         'public_html/dist/js',
-        imgs:       'public_html/dist/imgs',
-        vendors:    'public_html/dist/vendors'
+        // FIXED: Output to 'dist/assets' to match HTML paths (href="assets/...")
+        css:        'public_html/dist/assets/css',
+        js:         'public_html/dist/assets/js',
+        imgs:       'public_html/dist/assets/imgs',
+        vendors:    'public_html/dist/assets/vendors'
     }
 }
 
@@ -50,7 +51,7 @@ gulp.task('css', function() {
     return gulp.src(paths.src.css)
     .pipe(cleanCSS({compatibility: 'ie8'}))
     .pipe(concat('style.css'))
-    .pipe(rename({ suffix: '.min' }))
+    // REMOVED: .pipe(rename({ suffix: '.min' })) -> HTML looks for style.css
     .pipe(gulp.dest(paths.dist.css))
 });
 
@@ -58,8 +59,8 @@ gulp.task('css', function() {
 gulp.task('js', function() {
     return gulp.src(paths.src.js)
     .pipe(uglify())
-    .pipe(concat('style.js'))
-    .pipe(rename({ suffix: '.min' }))
+    .pipe(concat('johndoe.js')) // FIXED: Match the filename in index.html
+    // REMOVED: .pipe(rename({ suffix: '.min' })) -> HTML looks for johndoe.js
     .pipe(gulp.dest(paths.dist.js))
     .pipe(browserSync.stream());
 });
@@ -78,13 +79,13 @@ gulp.task('img', function(){
     .pipe(gulp.dest(paths.dist.imgs));
 });
 
-// Copy vendors to dist
+// Copy vendors
 gulp.task('vendors', function(){
     return gulp.src(paths.src.vendors)
     .pipe(gulp.dest(paths.dist.vendors))
 });
 
-// CRITICAL FIX: Copy HTML to dist
+// Copy HTML
 gulp.task('html', function(){
     return gulp.src(paths.src.html)
     .pipe(gulp.dest(paths.dist.root));
@@ -96,7 +97,7 @@ gulp.task('clean', function () {
         .pipe(clean());
 });
 
-// Build task (Now includes 'html')
+// Build task
 gulp.task('build', gulp.series('clean', 'sass', 'css', 'js', 'vendors', 'img', 'html'));
 
 // Watch task
